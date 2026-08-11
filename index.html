@@ -125,6 +125,7 @@
   }
   .pstar{font-size:20px;filter:grayscale(1) opacity(.35);transition:all .2s;}
   .pstar.done{filter:none;transform:scale(1.15);}
+  .pstar.miss{filter:none;transform:scale(1.15);}
   .qcard{
     background:#fff;border-radius:28px;padding:26px 18px 22px;text-align:center;
     box-shadow:0 10px 30px rgba(87,184,255,.20);
@@ -537,7 +538,13 @@
       fb.className = "feedback bad";
       soundWrong();
     }
-    document.querySelectorAll(".pstar")[qIndex].classList.add("done");
+    var star = document.querySelectorAll(".pstar")[qIndex];
+    if(val === q.answer){
+      star.classList.add("done");
+    } else {
+      star.textContent = "❌";
+      star.classList.add("miss");
+    }
     $("scoreLabel").textContent = "⭐ " + correctCount;
     setTimeout(next, val===q.answer ? 900 : 1900);
   }
